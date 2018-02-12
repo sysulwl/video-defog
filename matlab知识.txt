@@ -7,4 +7,19 @@ exist('im', 'var')是检测im这个变量是否存在
 zeros(m, n, k, ...);
  % 生成一个m*n*k*...的零矩阵
  
- min(im_min,[],3)
+ min(im_min,[],3):  im_min这个三维矩阵，化成二维矩阵，值取第三维中最小的。
+ 
+ imerode函数   腐蚀！
+ 
+ 看reshape([1:img_size],h,w); 这个用法   ：  reshape([1:129600],270,480);   注意: [1,n]生成行向量 [1,2,3,4....n]
+ 
+ sum(矩阵) = 求该矩阵所有数字的和
+ 
+ martrix(a:b, c:d) = matrix的第a - 第b行， 第c列到第d列的子矩阵
+ 
+ sparse函数： 生成稀疏矩阵
+ S = sparse(i,j,s,m,n,nzmax) 
+由向量i,j,s生成一个m*n的含有nzmax个非零元素的稀疏矩阵S，并且有 S(i(k),j(k)) = s(k)。
+向量 i，j 和 s 有相同的长度。对应对向量i和j的值，s 中任何零元素将被忽略
+ 
+ sumA=sum(A,2);  %A的每一行求和  降维
