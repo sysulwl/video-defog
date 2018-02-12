@@ -1,0 +1,47 @@
+场景深度   								scene depth
+立体匹配   								stereo matching 
+雾信息	   								fog information
+光相干项(照片一致性项)，光密度测量   	photo-consistency term
+散射效应   								scattering effects
+先验消光拉普拉斯约束   					prior matting Laplacian constraint
+细节保持平滑约束						detail-preserving smoothness constraint
+MRF框架
+辅助变量								auxiliary variables
+迭代优化								optimized iteratively 
+多视角立体								Multi-view stereo
+图像对比度								image contrast
+
+深度平滑								depth smoothness
+表面细节								surface details
+depth ordering
+detail preserving smoothness
+airlight-albedo
+unsaturated color
+multiple depth map approach
+multi-view stereo (MVS) vision 
+visibility
+occlusions
+consistency 
+sensitivity
+geometric coherence term
+geometric constraints
+characteristic artifacts
+energy functions
+ depth maps
+ shrinking bias
+ airlight
+ maximizing local contrast
+shading 
+transmission functions
+dark channe
+boundary constraint
+image fusion
+photo-consistency term
+  
+atmospheric light    是什么  ， alpha是什么？
+如何获取alpha ，  atomspheric light A呢。
+首先
+
+
+
+
