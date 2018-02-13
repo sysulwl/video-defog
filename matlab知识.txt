@@ -23,3 +23,14 @@ zeros(m, n, k, ...);
 向量 i，j 和 s 有相同的长度。对应对向量i和j的值，s 中任何零元素将被忽略
  
  sumA=sum(A,2);  %A的每一行求和  降维
+ 
+C++调用matlab， 贼6: 
+首先参考2个网站:		http://blog.csdn.net/u013575812/article/details/51200096
+http://blog.163.com/rongting_chen/blog/static/164906844201252354518462/
+1. 库目录-ok
+2. matlab命令行: 报错: No supported SDK or compiler was found on this computer. 
+我的matlab是64位的！！  vs2015 ，  matlab 2012不支持那么新的编译器
+目前mex能用的可能就这2个编译器了。
+[11] Microsoft Software Development Kit (SDK) 7.1 
+[14] Microsoft Visual C++ 2010 
+
