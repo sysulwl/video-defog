@@ -1,0 +1,16 @@
+# PCÏîÄ¿ignoreÅäÖÃ
+*.user
+*.suo
+*.sdf
+*.obj
+*.ilk
+*.exp
+*.pdb
+*.tlog
+*.log
+*.ipch
+*.opensdf
+*.pch
+*.dll
+*.exe
+*.lib
