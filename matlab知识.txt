@@ -34,3 +34,7 @@ http://blog.163.com/rongting_chen/blog/static/164906844201252354518462/
 [11] Microsoft Software Development Kit (SDK) 7.1 
 [14] Microsoft Visual C++ 2010 
 
+
+做完了matlab的配置。
+3. windows环境变量的配置
+
