@@ -2,13 +2,15 @@
 
 #include "stdafx.h"
 #include "CallMatlab.h"
- #include "engine.h"
+//#include "EngineFunction.h"
+#include "showBER.h"
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
 #pragma comment(lib, "libmat.lib")
 #pragma comment(lib, "libmx.lib")
 #pragma comment(lib, "mclmcrrt.lib")
 #pragma comment(lib, "mclmcr.lib")
+#pragma comment(lib, "showBER.lib")
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -23,70 +25,38 @@ LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
-                     HINSTANCE hPrevInstance,
-                     LPTSTR    lpCmdLine,
-                     int       nCmdShow)
+	HINSTANCE hPrevInstance,
+	LPTSTR    lpCmdLine,
+	int       nCmdShow)
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-
- 	// TODO: 在此放置代码。
+	// TODO: 在此放置代码。
 	MSG msg;
 	HACCEL hAccelTable;
-
 	// 初始化全局字符串
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_CALLMATLAB, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
-
 	// 执行应用程序初始化:
 	if (!InitInstance (hInstance, nCmdShow))
 	{
 		return FALSE;
 	}
-
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
+	//ShowEngine();
 
-		    Engine *ep;  
-  
-    // open engine  
-    if ((ep = engOpen("\0")) == NULL)  
-    {  
-        return EXIT_FAILURE;  
-    }  
-  
-    // generate variables  
-    int Nsample = 50;  
-    const double PI = 3.1415926;  
-    double *t = new double[Nsample] ;  
-  
-    for(int i = 0; i < Nsample; i++)  
-    {  
-        t[i] = i * 2 * PI / Nsample;  
-    }  
-  
-    mxArray *T = NULL;  
-    T = mxCreateDoubleMatrix(1, Nsample, mxREAL);  //1. 行数, 2. 列数  3.实数
-    memcpy((void *)mxGetPr(T), (void *)t, Nsample*sizeof(t[0])); //copy内容 
-  
-    engPutVariable(ep, "T", T);         // put data to engine  
-  
-    // execute matlab operations  
-    engEvalString(ep, "Y=sin(T);");  
-    engEvalString(ep, "plot(T,Y);");  
-    engEvalString(ep, "title('y=sin(t)');");  
-    engEvalString(ep, "xlabel('t');");  
-    engEvalString(ep, "ylabel('y');");  
-  
-    // clean operation(don't forget!!!)  
-    mxDestroyArray(T); 
-	T = NULL;
-    engEvalString(ep, "close;");  
-  
-    // close engine  
-    engClose(ep);  
-	ep = NULL;
-
+	double SNR[] = {0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5};
+	double BER[] = {9.728816e-002, 8.099609e-002, 5.633803e-002, 3.733608e-002, 1.253970e-002, 3.936489e-003, 1.206820e-003, 2.104052e-004, 3.109879e-005, 3.365857e-006, 2.565067e-007};
+	int len = sizeof(SNR) / sizeof(SNR[0]);
+	showBERInitialize();
+	mxArray* xSNR = mxCreateDoubleMatrix(1, len, mxREAL);
+	memcpy(mxGetPr(xSNR), (void*)SNR, sizeof(SNR));
+	mxArray* xBER = mxCreateDoubleMatrix(1, len, mxREAL);
+	memcpy(mxGetPr(xBER), (void*)BER, sizeof(BER));
+	mlfShowBER(xSNR,xBER);
+	system("PAUSE");
+	showBERTerminate();
 	// 主消息循环:
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
@@ -148,22 +118,22 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   HWND hWnd;
+	HWND hWnd;
 
-   hInst = hInstance; // 将实例句柄存储在全局变量中
+	hInst = hInstance; // 将实例句柄存储在全局变量中
 
-   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+	if (!hWnd)
+	{
+		return FALSE;
+	}
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+	ShowWindow(hWnd, nCmdShow);
+	UpdateWindow(hWnd);
 
-   return TRUE;
+	return TRUE;
 }
 
 //

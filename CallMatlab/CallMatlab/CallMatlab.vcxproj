@@ -69,8 +69,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\IT_Software\MATLAB_software\extern\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\IT_Software\MATLAB_software\extern\lib\win64\microsoft;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\include;D:\IT_Software\MATLAB_software\extern\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\include;D:\IT_Software\MATLAB_software\extern\lib\win64\microsoft;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CallMatlab.h" />
+    <ClInclude Include="EngineFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
