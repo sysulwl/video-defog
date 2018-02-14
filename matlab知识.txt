@@ -38,3 +38,6 @@ http://blog.163.com/rongting_chen/blog/static/164906844201252354518462/
 做完了matlab的配置。
 3. windows环境变量的配置
 
+error LNK2019: 无法解析的外部符号 _engOpen报错了:   http://www.ilovematlab.cn/thread-292626-1-1.html  ,改成x64之后。
+提示找不到libmeng.dll————那个包含目录忘了加那个 win64的记录
+

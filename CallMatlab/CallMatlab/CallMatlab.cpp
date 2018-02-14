@@ -1,9 +1,14 @@
 // CallMatlab.cpp : 定义应用程序的入口点。
-//
 
 #include "stdafx.h"
 #include "CallMatlab.h"
-
+ #include "engine.h"
+#pragma comment(lib, "libeng.lib")
+#pragma comment(lib, "libmx.lib")
+#pragma comment(lib, "libmat.lib")
+#pragma comment(lib, "libmx.lib")
+#pragma comment(lib, "mclmcrrt.lib")
+#pragma comment(lib, "mclmcr.lib")
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -41,6 +46,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
+
+	Engine *ep;
+	ep = engOpen(""); //定义Matlab引擎指针。初始化 
+	if ((ep = engOpen("\0")) == NULL)  
+	{  
+		return EXIT_FAILURE;  
+	} 
 
 	// 主消息循环:
 	while (GetMessage(&msg, NULL, 0, 0))
