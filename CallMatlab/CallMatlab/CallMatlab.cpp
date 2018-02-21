@@ -53,6 +53,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	/*------------------------ScriptTest函数的测试------------------------*/
 	ScriptTestInitialize();
 	mlfScriptTest();
+	system("PAUSE");
 	ScriptTestTerminate();
 	/*------------------------ScriptTest函数的测试------------------------*/
 

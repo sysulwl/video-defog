@@ -80,3 +80,18 @@ end
 实验对象: 显示一个3*3的二值化图
 实验结果: 显示OK
 短暂结论: 尚且未知脚本是否可能，不过之前的实验无法运行的原因是因为图片路径的问题，接下来应该使用绝对路径(或者在C++中读取)
+
+02-21:
+(1)实验对象，改成绝对路径的function,
+实验代码:
+function [] = ScriptTest()
+im = imread('D:\sysu_three\毕业设计\fstereo_release\data\bali\fog_images\0092.png');
+figure,imshow(im);
+end
+可以显示图片，这个函数没有问题，使用绝对路径最佳，或者使用路径字符串作为参数。
+
+(2)在实验(1)的基础上，改成脚本的运行方式
+实验代码:
+im = imread('D:\sysu_three\毕业设计\fstereo_release\data\bali\fog_images\0092.png');
+figure,imshow(im);
+经测试，也可以正常显示图片，脚本也是可以的！
