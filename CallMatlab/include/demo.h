@@ -1,6 +1,6 @@
 /*
  * MATLAB Compiler: 4.17 (R2012a)
- * Date: Wed Feb 14 20:28:06 2018
+ * Date: Fri Feb 23 00:24:06 2018
  * Arguments: "-B" "macro_default" "-B" "csharedlib:demo" "-W" "lib:demo" "-T"
  * "link:lib" "demo.m" 
  */
@@ -43,8 +43,7 @@ extern "C" {
 #define LIB_demo_C_API PUBLIC_demo_C_API
 
 
-
-
+#else
 
 #define LIB_demo_C_API
 

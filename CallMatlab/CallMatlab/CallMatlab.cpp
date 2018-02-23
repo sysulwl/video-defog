@@ -6,6 +6,7 @@
 #include "showBER.h"
 #include "demo.h"
 #include "ScriptTest.h"
+#include "OutFunction.h"
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
 #pragma comment(lib, "libmat.lib")
@@ -15,6 +16,7 @@
 #pragma comment(lib, "showBER.lib")
 #pragma comment(lib, "demo.lib")
 #pragma comment(lib, "ScriptTest.lib")
+#pragma comment(lib, "OutFunction.lib")
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -50,15 +52,22 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
 	//ShowEngine();
 
+	/*------------------------OutFunction函数的测试------------------------*/
+	//OutFunctionInitialize();
+	//mlfOutFunction();
+	//system("PAUSE");
+	//OutFunctionTerminate();
+	/*------------------------OutFunction函数的测试------------------------*/
+
 	/*------------------------ScriptTest函数的测试------------------------*/
-	ScriptTestInitialize();
-	mlfScriptTest();
-	system("PAUSE");
-	ScriptTestTerminate();
+	//ScriptTestInitialize();
+	//mlfScriptTest();
+	//system("PAUSE");
+	//ScriptTestTerminate();
 	/*------------------------ScriptTest函数的测试------------------------*/
 
 	/*------这是一个脚本，而不是一个函数------------*/
-	double SNR[] = {0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5};
+	/*double SNR[] = {0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5};
 	double BER[] = {9.728816e-002, 8.099609e-002, 5.633803e-002, 3.733608e-002, 1.253970e-002, 3.936489e-003, 1.206820e-003, 2.104052e-004, 3.109879e-005, 3.365857e-006, 2.565067e-007};
 	int len = sizeof(SNR) / sizeof(SNR[0]);
 	showBERInitialize();
@@ -68,14 +77,15 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	memcpy(mxGetPr(xBER), (void*)BER, sizeof(BER));
 	mlfShowBER(xSNR,xBER);
 	system("PAUSE");
-	showBERTerminate();
+	showBERTerminate();*/
 	/*------------------------showBER函数的测试------------------------*/
 
 	// 主消息循环:
 	/*------这是一个脚本，而不是一个函数------------*/
-	//demoInitialize();
-	//mlfDemo();
-	//demoTerminate();
+	demoInitialize();
+	mlfDemo();
+	system("PAUSE");
+	demoTerminate();
 	/*------这是一个脚本，而不是一个函数------------*/
 	while (GetMessage(&msg, NULL, 0, 0))
 	{

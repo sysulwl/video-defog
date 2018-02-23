@@ -95,3 +95,19 @@ end
 im = imread('D:\sysu_three\毕业设计\fstereo_release\data\bali\fog_images\0092.png');
 figure,imshow(im);
 经测试，也可以正常显示图片，脚本也是可以的！
+
+02-22:
+实验代码:
+function [] = OutFunction()
+im = imread('D:\sysu_three\毕业设计\fstereo_release\data\bali\fog_images\0092.png');
+figure,imshow(im);
+InnerFunction();
+end
+
+function [] = OutFunction()
+im = imread('D:\sysu_three\毕业设计\fstereo_release\data\bali\fog_images\0092.png');
+figure,imshow(im);
+InnerFunction();
+end
+
+完全可以使用多层函数调用啊！mcc是智能的！运行成功
