@@ -3,6 +3,9 @@
 #include "stdafx.h"
 #include "CallMatlab.h"
 #include "demo.h"
+#include "Defog.h"
+#include <string>
+#include <iostream>
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
 #pragma comment(lib, "libmat.lib")
@@ -10,6 +13,7 @@
 #pragma comment(lib, "mclmcrrt.lib")
 #pragma comment(lib, "mclmcr.lib")
 #pragma comment(lib, "demo.lib")
+#pragma comment(lib, "Defog.lib")
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -44,11 +48,34 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	}
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
 	/*------这是一个脚本，而不是一个函数------------*/
-	demoInitialize();
-	mlfDemo();
-	system("PAUSE");
-	demoTerminate();
 	/*------这是一个脚本，而不是一个函数------------*/
+
+	char szFilePath[100] = {"D:\\sysu_three\\毕业设计\\fstereo_release\\data\\bali\\fog_images\\"};
+	DefogInitialize();
+	for(int i = 81; i <= 300; i++)
+	{
+		std::string StrFileName;
+		char szTemp[10];
+		_itoa(i, szTemp, 10);
+		StrFileName = szTemp;
+		if(i < 100)		//两位数
+		{
+			StrFileName = "00" + StrFileName;
+		}
+		else
+		{
+			StrFileName = "0" + StrFileName;
+		}
+
+		StrFileName += ".png";
+		mxArray* MxStrFilePath = mxCreateString(szFilePath);
+		mxArray* MxStrFileName = mxCreateString(StrFileName.c_str());
+		mlfDefog(MxStrFilePath, MxStrFileName);
+		mxDestroyArray(MxStrFileName);
+		mxDestroyArray(MxStrFilePath);
+	}
+	DefogTerminate();
+
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
