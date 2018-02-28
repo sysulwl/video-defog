@@ -6,6 +6,9 @@
 #include "Defog.h"
 #include <string>
 #include <iostream>
+#include <comdef.h>
+#include <GdiPlus.h>
+#pragma comment(lib, "Gdiplus.lib")
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
 #pragma comment(lib, "libmat.lib")
@@ -47,8 +50,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 		return FALSE;
 	}
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
-	/*------这是一个脚本，而不是一个函数------------*/
-	/*------这是一个脚本，而不是一个函数------------*/
+
+
 
 	char szFilePath[100] = {"D:\\sysu_three\\毕业设计\\fstereo_release\\data\\bali\\fog_images\\"};
 	DefogInitialize();
@@ -56,7 +59,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	{
 		std::string StrFileName;
 		char szTemp[10];
-		_itoa(i, szTemp, 10);
+		_itoa_s(i, szTemp, 10);
 		StrFileName = szTemp;
 		if(i < 100)		//两位数
 		{
