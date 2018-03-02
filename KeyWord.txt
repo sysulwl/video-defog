@@ -137,3 +137,8 @@ Kang和Szeliski [43里面的19]提出通过添加时间平滑项同时优化多�
 能量方程的最优化
 
 3.6  本章小结
+
+vs全部代码排版：1. ctrl+E,D 按住ctrl，相继按下E、D
+2. ctrl+K,F 按住ctrl，相继按下K、F
+
+size_t在64位是unsigned long long , 转成int就会有警告

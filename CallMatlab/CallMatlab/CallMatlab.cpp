@@ -51,8 +51,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 		return FALSE;
 	}
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
-
-	ReadPhoto(L"lena.jpg","color.txt");
+	GdiplusStartupInput gdiplusstartupinput;  
+    ULONG_PTR gdiplustoken;  
+    GdiplusStartup(&gdiplustoken, &gdiplusstartupinput, NULL); 
+	//ReadPhoto(L"lena.jpg","color.txt");
 
 	char szFilePath[100] = {"D:\\sysu_three\\±ÏÒµÉè¼Æ\\fstereo_release\\data\\bali\\fog_images\\"};
 	DefogInitialize();
@@ -70,13 +72,19 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 		{
 			StrFileName = "0" + StrFileName;
 		}
-
 		StrFileName += ".png";
+		wchar_t szFileName[100] = {0};
+		AnsiToUnicode(StrFileName.c_str(), szFileName, StrFileName.size());
+		Bitmap* bmpEveryFrame = new Bitmap(szFileName);
+		int height = bmpEveryFrame->GetHeight();
+		int width =  bmpEveryFrame->GetWidth();
 		mxArray* MxStrFilePath = mxCreateString(szFilePath);
 		mxArray* MxStrFileName = mxCreateString(StrFileName.c_str());
 		mlfDefog(MxStrFilePath, MxStrFileName);
 		mxDestroyArray(MxStrFileName);
 		mxDestroyArray(MxStrFilePath);
+		delete bmpEveryFrame;
+
 	}
 	DefogTerminate();
 
@@ -88,7 +96,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 			DispatchMessage(&msg);
 		}
 	}
-
+	GdiplusShutdown(gdiplustoken);  
 	return (int) msg.wParam;
 }
 
