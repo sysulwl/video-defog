@@ -8,6 +8,7 @@
 #include <iostream>
 #include <comdef.h>
 #include <GdiPlus.h>
+#include "ali_api.h"
 #pragma comment(lib, "Gdiplus.lib")
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
@@ -51,7 +52,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	}
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CALLMATLAB));
 
-
+	ReadPhoto(L"lena.jpg","color.txt");
 
 	char szFilePath[100] = {"D:\\sysu_three\\±œ“µ…Ëº∆\\fstereo_release\\data\\bali\\fog_images\\"};
 	DefogInitialize();

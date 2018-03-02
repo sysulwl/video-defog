@@ -141,6 +141,7 @@
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ali_api.h" />
     <ClInclude Include="CallMatlab.h" />
     <ClInclude Include="EngineFunction.h" />
     <ClInclude Include="Resource.h" />

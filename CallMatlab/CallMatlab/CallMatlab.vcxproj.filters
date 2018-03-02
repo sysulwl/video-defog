@@ -39,6 +39,9 @@
     <ClInclude Include="EngineFunction.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ali_api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
