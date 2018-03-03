@@ -2,6 +2,7 @@
 #include <fstream>  
 #include <string>  
 #include <windows.h>  
+#include <assert.h>
 #include <gdiplus.h>  
 #pragma comment(lib, "gdiplus.lib")  
   
@@ -39,13 +40,11 @@ void ReadPhoto(const wstring& infilename, const string& outfilename)
 
 int EncodeTransform_MToW(const char* str, wchar_t* pBuf, int nBufLen, unsigned int nCodePage)
 {
-	//If_OMWarn_Return(str == NullPtr || pBuf == NullPtr || nBufLen <= 0, -1);
-
+	assert(!(str == NULL || pBuf == NULL || nBufLen <= 0));
 	pBuf[0] = 0;
 
 	int nCalcLen = ::MultiByteToWideChar(nCodePage, 0, str, -1, NULL, 0);
-	//If_OMWarn_Return(nCalcLen <= 0 || nCalcLen > nBufLen, -1);
-
+	assert(!(nCalcLen <= 0 || nCalcLen > nBufLen));
 	return ::MultiByteToWideChar(nCodePage, 0, str, -1, pBuf, nBufLen);
 }
 
