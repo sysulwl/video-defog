@@ -11,6 +11,8 @@
 #include "ali_api.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/highgui/highgui_c.h>
+#include "CVOperation.h"
 #pragma comment(lib, "Gdiplus.lib")
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
@@ -57,8 +59,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
     ULONG_PTR gdiplustoken;  
     GdiplusStartup(&gdiplustoken, &gdiplusstartupinput, NULL); 
 	//ReadPhoto(L"lena.jpg","color.txt");
+	int Useless = CreatePNG();
 	// 读入一张图片  
-	cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg");
+	cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg",CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_COLOR);
 	cv::namedWindow("原图");
 	cv::imshow("原图",img);
 	cv::waitKey(6000);
@@ -102,7 +105,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 			DispatchMessage(&msg);
 		}
 	}
-	GdiplusShutdown(gdiplustoken);  
+	GdiplusShutdown(gdiplustoken); 
+	cv::destroyAllWindows();
 	return (int) msg.wParam;
 }
 

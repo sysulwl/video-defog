@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="ali_api.h" />
     <ClInclude Include="CallMatlab.h" />
+    <ClInclude Include="CVOperation.h" />
     <ClInclude Include="EngineFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
