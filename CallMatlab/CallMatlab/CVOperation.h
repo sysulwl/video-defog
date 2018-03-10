@@ -57,7 +57,7 @@ int UseExample( )
 	//定义一个Mat类型，用于存放，图像的ROI  
 	cv::Mat imageROI;
 	//方法一  
-	imageROI=image(cv::Rect(201,200,logo.cols,logo.rows));  
+	imageROI=image(cv::Rect(100,100,logo.cols,logo.rows));  
 	//将logo加到原图上  
 	addWeighted(imageROI,0.5,logo,0.3,0.0,imageROI);
 
