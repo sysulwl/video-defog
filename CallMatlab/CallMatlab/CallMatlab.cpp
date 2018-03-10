@@ -1,4 +1,4 @@
-// CallMatlab.cpp : ¶¨ÒåÓ¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+ï»¿// CallMatlab.cpp : å®šä¹‰åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 
 #include "stdafx.h"
 #include "CallMatlab.h"
@@ -9,6 +9,8 @@
 #include <comdef.h>
 #include <GdiPlus.h>
 #include "ali_api.h"
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #pragma comment(lib, "Gdiplus.lib")
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
@@ -20,12 +22,12 @@
 #pragma comment(lib, "Defog.lib")
 #define MAX_LOADSTRING 100
 
-// È«¾Ö±äÁ¿:
-HINSTANCE hInst;								// µ±Ç°ÊµÀı
-TCHAR szTitle[MAX_LOADSTRING];					// ±êÌâÀ¸ÎÄ±¾
-TCHAR szWindowClass[MAX_LOADSTRING];			// Ö÷´°¿ÚÀàÃû
+// å…¨å±€å˜é‡:
+HINSTANCE hInst;								// å½“å‰å®ä¾‹
+TCHAR szTitle[MAX_LOADSTRING];					// æ ‡é¢˜æ æ–‡æœ¬
+TCHAR szWindowClass[MAX_LOADSTRING];			// ä¸»çª—å£ç±»å
 
-// ´Ë´úÂëÄ£¿éÖĞ°üº¬µÄº¯ÊıµÄÇ°ÏòÉùÃ÷:
+// æ­¤ä»£ç æ¨¡å—ä¸­åŒ…å«çš„å‡½æ•°çš„å‰å‘å£°æ˜:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -38,14 +40,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	// TODO: ÔÚ´Ë·ÅÖÃ´úÂë¡£
+	// TODO: åœ¨æ­¤æ”¾ç½®ä»£ç ã€‚
 	MSG msg;
 	HACCEL hAccelTable;
-	// ³õÊ¼»¯È«¾Ö×Ö·û´®
+	// åˆå§‹åŒ–å…¨å±€å­—ç¬¦ä¸²
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_CALLMATLAB, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
-	// Ö´ĞĞÓ¦ÓÃ³ÌĞò³õÊ¼»¯:
+	// æ‰§è¡Œåº”ç”¨ç¨‹åºåˆå§‹åŒ–:
 	if (!InitInstance (hInstance, nCmdShow))
 	{
 		return FALSE;
@@ -55,8 +57,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
     ULONG_PTR gdiplustoken;  
     GdiplusStartup(&gdiplustoken, &gdiplusstartupinput, NULL); 
 	//ReadPhoto(L"lena.jpg","color.txt");
-
-	char szFilePath[100] = {"D:\\sysu_three\\±ÏÒµÉè¼Æ\\fstereo_release\\data\\bali\\fog_images\\"};
+	//Â è¯»å…¥ä¸€å¼ å›¾ç‰‡Â Â 
+	cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg");
+	cv::namedWindow("åŸå›¾");
+	cv::imshow("åŸå›¾",img);
+	cv::waitKey(6000);
+	char szFilePath[100] = {"D:\\sysu_three\\æ¯•ä¸šè®¾è®¡\\fstereo_release\\data\\bali\\fog_images\\"};
 	DefogInitialize();
 	for(int i = 81; i <= 300; i++)
 	{
@@ -64,7 +70,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 		char szTemp[10];
 		_itoa_s(i, szTemp, 10);
 		StrFileName = szTemp;
-		if(i < 100)		//Á½Î»Êı
+		if(i < 100)		//ä¸¤ä½æ•°
 		{
 			StrFileName = "00" + StrFileName;
 		}
@@ -103,17 +109,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 
 
 //
-//  º¯Êı: MyRegisterClass()
+//  å‡½æ•°: MyRegisterClass()
 //
-//  Ä¿µÄ: ×¢²á´°¿ÚÀà¡£
+//  ç›®çš„: æ³¨å†Œçª—å£ç±»ã€‚
 //
-//  ×¢ÊÍ:
+//  æ³¨é‡Š:
 //
-//    ½öµ±Ï£Íû
-//    ´Ë´úÂëÓëÌí¼Óµ½ Windows 95 ÖĞµÄ¡°RegisterClassEx¡±
-//    º¯ÊıÖ®Ç°µÄ Win32 ÏµÍ³¼æÈİÊ±£¬²ÅĞèÒª´Ëº¯Êı¼°ÆäÓÃ·¨¡£µ÷ÓÃ´Ëº¯ÊıÊ®·ÖÖØÒª£¬
-//    ÕâÑùÓ¦ÓÃ³ÌĞò¾Í¿ÉÒÔ»ñµÃ¹ØÁªµÄ
-//    ¡°¸ñÊ½ÕıÈ·µÄ¡±Ğ¡Í¼±ê¡£
+//    ä»…å½“å¸Œæœ›
+//    æ­¤ä»£ç ä¸æ·»åŠ åˆ° Windows 95 ä¸­çš„â€œRegisterClassExâ€
+//    å‡½æ•°ä¹‹å‰çš„ Win32 ç³»ç»Ÿå…¼å®¹æ—¶ï¼Œæ‰éœ€è¦æ­¤å‡½æ•°åŠå…¶ç”¨æ³•ã€‚è°ƒç”¨æ­¤å‡½æ•°ååˆ†é‡è¦ï¼Œ
+//    è¿™æ ·åº”ç”¨ç¨‹åºå°±å¯ä»¥è·å¾—å…³è”çš„
+//    â€œæ ¼å¼æ­£ç¡®çš„â€å°å›¾æ ‡ã€‚
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -137,20 +143,20 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 }
 
 //
-//   º¯Êı: InitInstance(HINSTANCE, int)
+//   å‡½æ•°: InitInstance(HINSTANCE, int)
 //
-//   Ä¿µÄ: ±£´æÊµÀı¾ä±ú²¢´´½¨Ö÷´°¿Ú
+//   ç›®çš„: ä¿å­˜å®ä¾‹å¥æŸ„å¹¶åˆ›å»ºä¸»çª—å£
 //
-//   ×¢ÊÍ:
+//   æ³¨é‡Š:
 //
-//        ÔÚ´Ëº¯ÊıÖĞ£¬ÎÒÃÇÔÚÈ«¾Ö±äÁ¿ÖĞ±£´æÊµÀı¾ä±ú²¢
-//        ´´½¨ºÍÏÔÊ¾Ö÷³ÌĞò´°¿Ú¡£
+//        åœ¨æ­¤å‡½æ•°ä¸­ï¼Œæˆ‘ä»¬åœ¨å…¨å±€å˜é‡ä¸­ä¿å­˜å®ä¾‹å¥æŸ„å¹¶
+//        åˆ›å»ºå’Œæ˜¾ç¤ºä¸»ç¨‹åºçª—å£ã€‚
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
 	HWND hWnd;
 
-	hInst = hInstance; // ½«ÊµÀı¾ä±ú´æ´¢ÔÚÈ«¾Ö±äÁ¿ÖĞ
+	hInst = hInstance; // å°†å®ä¾‹å¥æŸ„å­˜å‚¨åœ¨å…¨å±€å˜é‡ä¸­
 
 	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
@@ -167,13 +173,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  º¯Êı: WndProc(HWND, UINT, WPARAM, LPARAM)
+//  å‡½æ•°: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  Ä¿µÄ: ´¦ÀíÖ÷´°¿ÚµÄÏûÏ¢¡£
+//  ç›®çš„: å¤„ç†ä¸»çª—å£çš„æ¶ˆæ¯ã€‚
 //
-//  WM_COMMAND	- ´¦ÀíÓ¦ÓÃ³ÌĞò²Ëµ¥
-//  WM_PAINT	- »æÖÆÖ÷´°¿Ú
-//  WM_DESTROY	- ·¢ËÍÍË³öÏûÏ¢²¢·µ»Ø
+//  WM_COMMAND	- å¤„ç†åº”ç”¨ç¨‹åºèœå•
+//  WM_PAINT	- ç»˜åˆ¶ä¸»çª—å£
+//  WM_DESTROY	- å‘é€é€€å‡ºæ¶ˆæ¯å¹¶è¿”å›
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -187,7 +193,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);
 		wmEvent = HIWORD(wParam);
-		// ·ÖÎö²Ëµ¥Ñ¡Ôñ:
+		// åˆ†æèœå•é€‰æ‹©:
 		switch (wmId)
 		{
 		case IDM_ABOUT:
@@ -202,7 +208,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		// TODO: ÔÚ´ËÌí¼ÓÈÎÒâ»æÍ¼´úÂë...
+		// TODO: åœ¨æ­¤æ·»åŠ ä»»æ„ç»˜å›¾ä»£ç ...
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
@@ -214,7 +220,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-// ¡°¹ØÓÚ¡±¿òµÄÏûÏ¢´¦Àí³ÌĞò¡£
+// â€œå…³äºâ€æ¡†çš„æ¶ˆæ¯å¤„ç†ç¨‹åºã€‚
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(lParam);
