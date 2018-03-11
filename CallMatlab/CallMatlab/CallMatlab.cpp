@@ -59,7 +59,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
     ULONG_PTR gdiplustoken;  
     GdiplusStartup(&gdiplustoken, &gdiplusstartupinput, NULL); 
 	//ReadPhoto(L"lena.jpg","color.txt");
-	int Useless = CreatePNG();
+	int Useless = TrackbarExample();
 	Useless = UseExample();
 	// 读入一张图片  
 	cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg",CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_COLOR);
