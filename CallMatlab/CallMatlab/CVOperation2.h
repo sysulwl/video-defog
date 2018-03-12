@@ -116,7 +116,7 @@ static void on_GaussianBlur(int, void *)
 	imshow("【<3>高斯滤波】", g_dstImage3);  
 } 
 
-int MedianBlur( )  
+void MedianBlur( )  
 {  
 	//载入原图  
 	Mat image=imread("1.jpg");  
@@ -133,5 +133,27 @@ int MedianBlur( )
 	medianBlur( image, out, 7);  
 	//显示效果图  
 	imshow("中值滤波【效果图】" ,out );  
+	waitKey(0 );      
+} 
+
+void BilateralFilter( )  
+{  
+	//载入原图  
+	Mat image=imread("1.jpg");  
+
+	//创建窗口  
+	namedWindow("双边滤波【原图】" );  
+	namedWindow("双边滤波【效果图】");  
+
+	//显示原图  
+	imshow("双边滤波【原图】", image );  
+
+	//进行双边滤波操作  
+	Mat out;  
+	bilateralFilter( image, out, 25, 25*2, 25/2 );  
+
+	//显示效果图  
+	imshow("双边滤波【效果图】" ,out );  
+
 	waitKey(0 );      
 } 
