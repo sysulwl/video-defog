@@ -13,6 +13,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/highgui/highgui_c.h>
 #include "CVOperation.h"
+#include "CVOperation2.h"
+#include "CVOperation3.h"
 #pragma comment(lib, "Gdiplus.lib")
 #pragma comment(lib, "libeng.lib")
 #pragma comment(lib, "libmx.lib")
