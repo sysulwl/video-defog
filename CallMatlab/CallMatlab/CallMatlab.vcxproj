@@ -146,6 +146,7 @@
     <ClInclude Include="CVOperation.h" />
     <ClInclude Include="CVOperation2.h" />
     <ClInclude Include="CVOperation3.h" />
+    <ClInclude Include="CVOperation4.h" />
     <ClInclude Include="EngineFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
