@@ -110,3 +110,129 @@ int OpenOperation( )
 
 	return 0;   
 }  
+
+int CloseOperation()  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】闭运算");   
+	namedWindow("【效果图】闭运算");   
+	//显示原始图   
+	imshow("【原始图】闭运算", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_CLOSE, element);  
+	//显示效果图   
+	imshow("【效果图】闭运算", image);   
+
+	waitKey(0);   
+
+	return 0;   
+} 
+
+int MorphGradient( )  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】形态学梯度");   
+	namedWindow("【效果图】形态学梯度");   
+	//显示原始图   
+	imshow("【原始图】形态学梯度", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_GRADIENT, element);  
+	//显示效果图   
+	imshow("【效果图】形态学梯度", image);   
+
+	waitKey(0);   
+
+	return 0;   
+} 
+
+int MorphTopHat( )  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】顶帽运算");   
+	namedWindow("【效果图】顶帽运算");   
+	//显示原始图   
+	imshow("【原始图】顶帽运算", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_TOPHAT, element);  
+	//显示效果图   
+	imshow("【效果图】顶帽运算", image);   
+
+	waitKey(0);   
+
+	return 0;   
+}  
+
+int MorphBlackHat()  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】黑帽运算");   
+	namedWindow("【效果图】黑帽运算");   
+	//显示原始图   
+	imshow("【原始图】黑帽运算", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_BLACKHAT, element);  
+	//显示效果图   
+	imshow("【效果图】黑帽运算", image);   
+
+	waitKey(0);   
+
+	return 0;   
+} 
+
+int MorphErode( )  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】腐蚀");   
+	namedWindow("【效果图】腐蚀");   
+	//显示原始图   
+	imshow("【原始图】腐蚀", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_ERODE, element);  
+	//显示效果图   
+	imshow("【效果图】腐蚀", image);   
+
+	waitKey(0);   
+
+	return 0;   
+} 
+
+int MorphDilate( )  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】膨胀");   
+	namedWindow("【效果图】膨胀");   
+	//显示原始图   
+	imshow("【原始图】膨胀", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_DILATE, element);  
+	//显示效果图   
+	imshow("【效果图】膨胀", image);   
+
+	waitKey(0);   
+
+	return 0;   
+} 
