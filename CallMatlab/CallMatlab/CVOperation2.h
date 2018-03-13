@@ -157,3 +157,31 @@ void BilateralFilter( )
 
 	waitKey(0 );      
 } 
+
+int Erode()  
+{  
+	//载入原图   
+	Matimage = imread("1.jpg");  
+
+	//创建窗口   
+	namedWindow("【原图】腐蚀操作");  
+	namedWindow("【效果图】腐蚀操作");  
+
+	//显示原图  
+	imshow("【原图】腐蚀操作", image);  
+
+
+	//获取自定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));  
+	Mat out;  
+
+	//进行腐蚀操作  
+	erode(image,out, element);  
+
+	//显示效果图  
+	imshow("【效果图】腐蚀操作", out);  
+
+	waitKey(0);  
+
+	return 0;  
+}  
