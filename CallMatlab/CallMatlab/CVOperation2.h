@@ -87,7 +87,7 @@ int OpenCV8_Filter(  )
 static void on_BoxFilter(int, void *)  
 {  
 	//方框滤波操作  
-	boxFilter(g_srcImage, g_dstImage1, -1,Size( g_nBoxFilterValue+1, g_nBoxFilterValue+1));  
+	boxFilter(g_srcImage, g_dstImage1, -1,cv::Size( g_nBoxFilterValue+1, g_nBoxFilterValue+1));  
 	//显示窗口  
 	imshow("【<1>方框滤波】", g_dstImage1);  
 }  

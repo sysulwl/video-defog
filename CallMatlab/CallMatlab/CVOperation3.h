@@ -89,3 +89,24 @@ void on_ElementSizeChange(int, void *)
 	//内核尺寸已改变，回调函数体内需调用一次Process函数，使改变后的效果立即生效并显示出来  
 	Process();  
 }  
+
+int OpenOperation( )  
+{  
+	//载入原始图    
+	Mat image = imread("1.jpg");  //工程目录下应该有一张名为1.jpg的素材图  
+	//创建窗口    
+	namedWindow("【原始图】开运算");   
+	namedWindow("【效果图】开运算");   
+	//显示原始图   
+	imshow("【原始图】开运算", image);   
+	//定义核  
+	Mat element = getStructuringElement(MORPH_RECT, Size(15, 15));   
+	//进行形态学操作  
+	morphologyEx(image,image, MORPH_OPEN, element);  
+	//显示效果图   
+	imshow("【效果图】开运算", image);   
+
+	waitKey(0);   
+
+	return 0;   
+}  
