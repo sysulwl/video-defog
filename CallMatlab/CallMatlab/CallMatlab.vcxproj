@@ -149,6 +149,7 @@
     <ClInclude Include="CVOperation4.h" />
     <ClInclude Include="EdgeDetection.h" />
     <ClInclude Include="EngineFunction.h" />
+    <ClInclude Include="HarrisOperation.h" />
     <ClInclude Include="HoughDetection.h" />
     <ClInclude Include="ResizeOperation.h" />
     <ClInclude Include="Resource.h" />
