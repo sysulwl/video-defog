@@ -57,6 +57,9 @@
     <ClInclude Include="EdgeDetection.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ResizeOperation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

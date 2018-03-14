@@ -13,6 +13,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/highgui/highgui_c.h>
 #include "CVOperation.h"
+#include "ResizeOperation.h"
 //#include "CVOperation2.h"
 //#include "CVOperation3.h"
 #pragma comment(lib, "Gdiplus.lib")
