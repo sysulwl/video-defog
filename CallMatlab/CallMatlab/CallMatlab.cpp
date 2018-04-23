@@ -27,7 +27,10 @@
 #pragma comment(lib, "demo.lib")
 #pragma comment(lib, "Defog.lib")
 #define MAX_LOADSTRING 100
-
+#define R 0
+#define G 1
+#define B 2
+#define D 3
 // 全局变量:
 HINSTANCE hInst;								// 当前实例
 TCHAR szTitle[MAX_LOADSTRING];					// 标题栏文本
@@ -39,6 +42,7 @@ BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
+int TempData[1000][1000][1000] = {0};
 int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	HINSTANCE hPrevInstance,
 	LPTSTR    lpCmdLine,
@@ -66,7 +70,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 	int Useless = TrackbarExample();
 	Useless = UseExample();
 	// 读入一张图片  
-	cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg",CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_COLOR);
+	//cv::Mat img = cv::imread("C:\\Users\\lwl\\Desktop\\lena.jpg",CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_COLOR);
 	cv::namedWindow("原图");
 	cv::imshow("原图",img);
 	cv::waitKey(6000);
@@ -89,6 +93,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,		//main function
 		StrFileName += ".png";
 		wchar_t szFileName[100] = {0};
 		AnsiToUnicode(StrFileName.c_str(), szFileName, StrFileName.size());
+		ReadPhoto(StrFileName.c_str(),StrFileName.size()); //ReadPhoto
 		Bitmap* bmpEveryFrame = new Bitmap(szFileName);
 		int height = bmpEveryFrame->GetHeight();
 		int width =  bmpEveryFrame->GetWidth();
